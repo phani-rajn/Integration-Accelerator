@@ -45,18 +45,18 @@
 
 Every component in the package is editable. 
 1. Check for desired profile to enable Integration Setup Tab in your org.
-2. Create a record in Integration Setup object with following details
-** Name for Integration – This would be used as identifier in our integration framework. So, this could be kept as unique name.
-** End Point Url
-** Request Type – **GET, POST, PUT, PATCH** *(Note: It is expected there will remote site settings for domain url if the request is of type GET)*
-** Response Parse Class Name – Ideally for any response we would be getting in any integration, we create a wrapper class. We could also use sObject name here if desired response is of type sObject details.
-** Is Response a collection type – if the response is of type collection, pls check this checkbox.
+2. Create a record in Integration Setup object with following details<br/>
+** Name for Integration – This would be used as identifier in our integration framework. So, this could be kept as unique name.<br/>
+** End Point Url<br/>
+** Request Type – **GET, POST, PUT, PATCH** *(Note: It is expected there will remote site settings for domain url if the request is of type GET)*<br/>
+** Response Parse Class Name – Ideally for any response we would be getting in any integration, we create a wrapper class. We could also use sObject name here if desired response is of type sObject details.<br/>
+** Is Response a collection type – if the response is of type collection, pls check this checkbox.<br/>
 3. If the Integration Setup created above needs to set header details or url parameters, create record in Related List – Integration Values Setup.
 4. Create a record in Integration values setup with following details.
-** Related Integration Setup – Master detail field with Integration setup object.
-** Type – Header or Url Param.
-** Type Key – Key element for Type.
-** Type Value – Value element for Type.
+** Related Integration Setup – Master detail field with Integration setup object.<br/>
+** Type – Header or Url Param.<br/>
+** Type Key – Key element for Type.<br/>
+** Type Value – Value element for Type.<br/>
 If the value is expected to be dynamic use a placeholder like this {0},{1},{2}. We will pass list of String for these values to be replaced. For Ex:
 
 |Type Key|Type Value|
@@ -65,7 +65,7 @@ If the value is expected to be dynamic use a placeholder like this {0},{1},{2}. 
 |Param 2|{1}|
 |Param 3|{2}|
 
-We will pass List of String and each index in List will replace the placeholder dynamically.
+We will pass List of String and each index in List will replace the placeholder dynamically. Refer image above
 
 
 Things to consider:
