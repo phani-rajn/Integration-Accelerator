@@ -43,9 +43,7 @@
 |--------------|-------------|--------------|
 |Integration Setup||Tab|
 
-
-Here is the package url : https://login.salesforce.com/packaging/installPackage.apexp?p0=04t2v000005tEla 
-As this is unmanaged package, every component in the package is editable. 
+Every component in the package is editable. 
 * Check for desired profile to enable Integration Setup Tab in your org.
 * Create a record in Integration Setup object with following details
 ** Name for Integration – This would be used as identifier in our integration framework. So, this could be kept as unique name.
