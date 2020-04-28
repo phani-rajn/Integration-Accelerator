@@ -69,14 +69,8 @@ Screenshots for example:
 
 
 #### Code Snippets
-**The code supports both static and non static methods. Below is the snippet for various use-cases.**<br/>
-*GET Request With static parameters defined or no parameters defined*<br/>
-If we have a setup where we have GET request setup and if the parameters are statically defined in setup values object
-```
-HttpApiFactory.requestResourceStatic(<Integration Setup Name>)
-```
-<br/>
-*GET Request With dynamic parameters defined*<br/>
+**The code supports both static and non static methods. Below is the snippet for various use-cases.**
+
 ![](Images/DynamicParamValuesForIntegration.png)
-<br/>
+
 
