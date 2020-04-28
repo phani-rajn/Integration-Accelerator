@@ -3,41 +3,45 @@
 
 ### Package Components	 
 #### Resources (3)
-Component Name	Parent Object	Component Type
-All	Integration Setup	List View
-Integration Values Setup Layout	Integration Values Setup	Page Layout
-Integration Setup Layout	Integration Setup	Page Layout
+|Component Name|Parent Object|Component Type|
+|--------------|-------------|--------------|
+|All	|Integration Setup|	List View|
+|Integration Values Setup Layout|Integration Values Setup|Page Layout|
+|Integration Setup Layout|Integration Setup|Page Layout|
 
  
-Code (4)
-Component Name	Parent Object	Component Type
-HttpApiFactory_Test		Apex Class
-CustomException		Apex Class
-HttpApiFactory		Apex Class
-MockHttpResponseGeneratorForHTTPFactory		Apex Class
+#### Code (4)
+|Component Name|Parent Object|Component Type|
+|--------------|-------------|--------------|
+|HttpApiFactory_Test||Apex Class|
+|CustomException||Apex Class|
+|HttpApiFactory||Apex Class|
+|MockHttpResponseGeneratorForHTTPFactory||Apex Class|
 
  
-Objects (2)
-Component Name	Parent Object	Component Type
-Integration Setup		Custom Object
-Integration Values Setup		Custom Object
+#### Objects (2)
+|Component Name|Parent Object|Component Type|
+|--------------|-------------|--------------|
+|Integration Setup||Custom Object|
+|Integration Values Setup||Custom Object|
+
+#### Fields (8)
+|Component Name|Parent Object|Component Type|
+|--------------|-------------|--------------|
+|Related Integration Setup|Integration Values Setup|Custom Field|
+|Type Key|Integration Values Setup|Custom Field|
+|Response Parse Class Name|Integration Setup|Custom Field|
+|Callout Endpoint Url|Integration Setup|Custom Field|
+|Request Type|Integration Setup|Custom Field|
+|Type Value|	Integration Values Setup|Custom Field|
+|Type|	Integration Values Setup|Custom Field|
+|Is Response a collection type|Integration Setup|Custom Field|
 
  
-Fields (8)
-Component Name	Parent Object	Component Type
-Related Integration Setup	Integration Values Setup	Custom Field
-Type Key	Integration Values Setup	Custom Field
-Response Parse Class Name	Integration Setup	Custom Field
-Callout Endpoint Url	Integration Setup	Custom Field
-Request Type	Integration Setup	Custom Field
-Type Value	Integration Values Setup	Custom Field
-Type	Integration Values Setup	Custom Field
-Is Response a collection type	Integration Setup	Custom Field
-
- 
-Tabs (1)
-Component Name	Parent Object	Component Type
-Integration Setup		Tab
+#### Tabs (1)
+|Component Name|Parent Object|Component Type|
+|--------------|-------------|--------------|
+|Integration Setup||Tab|
 
 
 Here is the package url : https://login.salesforce.com/packaging/installPackage.apexp?p0=04t2v000005tEla 
