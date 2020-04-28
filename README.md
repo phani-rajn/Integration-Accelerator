@@ -54,7 +54,7 @@ Every component in the package is editable.
 3. If the Integration Setup created above needs to set header details or url parameters, create record in Related List – Integration Values Setup.
 4. Create a record in Integration values setup with following details.
 ** Related Integration Setup – Master detail field with Integration setup object.<br/>
-** Type – Header or Url Param.<br/>
+** Type – **Header** or **Url Param** or **RequestURI_with_lastIndex**<br/>
 ** Type Key – Key element for Type.<br/>
 ** Type Value – Value element for Type.<br/>
 If the value is expected to be dynamic use a placeholder like this {0},{1},{2}. We will pass list of String for these values to be replaced. For Ex:
@@ -65,7 +65,14 @@ If the value is expected to be dynamic use a placeholder like this {0},{1},{2}. 
 |Param 2|{1}|
 |Param 3|{2}|
 
-We will pass List of String and each index in List will replace the placeholder dynamically. Refer image above
+We will pass List of String and each index in List will replace the placeholder dynamically. Refer image above.
+
+** If we are considering to use the framework where we are getting the Id of the record in the url and fetching it using requestUri method, then we could set the record values 
+
+|Type|Type Key|Type Value|
+|----|--------|----------|
+|RequestURI_with_lastIndex|AccountId|{0}|
+
 
 
 Things to consider:
