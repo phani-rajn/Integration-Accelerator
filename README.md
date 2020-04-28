@@ -60,9 +60,10 @@ b.	Type – Header or Url Param
 c.	Type Key – Key element for Type
 d.	Type Value – Value element for Type
 5.	Test the Integration with following code snippet
+```
 HttpApiFactory.requestResourceStatic(<name of integration setup record created above>, 
 <body if the request is of type POST else this can be null>);
-
+```
 6.	This will give a debug of the response if request is successful.
 
 Things to consider:
