@@ -81,9 +81,17 @@ Screenshots for example:
 #### Code Snippets
 **The code supports both static and non static methods. Below is the snippet for various use-cases.**
 ```
-// Specifically for GET Request where we need to hit endpoint with static parameters or no parameters
+// Static Method - Specifically for GET Request where we need to hit endpoint with static parameters or no parameters
 HttpApiFactory.requestResourceStatic(<Integration Setup Name>) 
 ```
 
+```
+// Static Method - Specifically for POST Method.
+HttpApiFactory.requestResourceStatic(<Integration Setup Name>,<JSON String for POST Method>)
+```
 
+```
+// Static Method - Specifically for GET Method where we need to have dynamic parameter values. Each Index of List will be considered as parameter value.
+HttpApiFactory.requestResourceStatic(<Integration Setup Name>,<List of String parameter values>);
+```
 
