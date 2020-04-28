@@ -86,7 +86,7 @@ Screenshots for example:
 ---
 ![](Images/DynamicParamValuesForIntegration.png)
 
-#### Code Snippets
+## Code Snippets
 **The code supports both static and non static methods. Below is the snippet for various use-cases.**
 *Static Methods*
 ```
