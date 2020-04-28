@@ -53,7 +53,7 @@ Every component in the package is editable.
 ** Response Parse Class Name – Ideally for any response we would be getting in any integration, we create a wrapper class. We could also use sObject name here if desired response is of type sObject details.<br/>
 ** Is Response a collection type – if the response is of type collection, pls check this checkbox.<br/>
 3. If the Integration Setup created above needs to set header details or url parameters, create record in Related List – Integration Values Setup.
-4. Create a record in Integration values setup with following details.
+4. Create a record in Integration values setup with following details.<br/>
 ** Related Integration Setup – Master detail field with Integration setup object.<br/>
 ** Type – **Header** or **Url Param** or **RequestURI_with_lastIndex**<br/>
 ** Type Key – Key element for Type.<br/>
