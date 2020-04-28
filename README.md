@@ -58,11 +58,6 @@ Every component in the package is editable.
 4c. Type Key – Key element for Type
 4d. Type Value – Value element for Type
 If the value is expected to be dynamic use a placeholder like this {0},{1},{2}. We will pass list of String for these values to be replaced. For Ex:
-|Type Key|Type Value|
-|--------|----------|
-|Param 1|{0}|
-|Param 2|{1}|
-|Param 3|{2}|
 
 We will pass List of String and each index in List will replace the placeholder dynamically.
 
