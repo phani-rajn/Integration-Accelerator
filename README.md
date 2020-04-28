@@ -57,12 +57,7 @@ Every component in the package is editable.
 ** Type – Header or Url Param
 ** Type Key – Key element for Type
 ** Type Value – Value element for Type
-* Test the Integration with following code snippet
-```
-HttpApiFactory.requestResourceStatic(<name of integration setup record created above>, 
-<body if the request is of type POST else this can be null>);
-```
-* This will give a debug of the response if request is successful.
+
 
 Things to consider:
 * It is suggested to create a Named Credential if the Authentication is of type Username-password or oAuth authentication.
@@ -71,3 +66,9 @@ Things to consider:
 
 Screenshots for example:
 ![](Images/IntegrationSetup.png)
+
+
+### Code Snippets
+##### The code supports both static and non static methods.
+*Below is the snippet for various use-cases*
+
