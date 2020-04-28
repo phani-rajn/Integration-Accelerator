@@ -70,4 +70,4 @@ Things to consider:
 * Endpoint generated created in Named Credentials can be used in Integration Setup object. 
 
 Screenshots for example:
- 
+![](images/IntegrationSetup.png)
