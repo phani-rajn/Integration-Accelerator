@@ -1,6 +1,11 @@
 # Integration Accelerator Asset
 ## User Manual
 
+<a href="https://githubsfdeploy.herokuapp.com?owner=phani-rajn&repo=Integration-Accelerator&ref=master">
+  <img alt="Deploy to Salesforce"
+       src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
+</a>
+
 ### Package Components	 
 #### Resources (3)
 |Component Name|Parent Object|Component Type|
