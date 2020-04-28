@@ -66,7 +66,7 @@ If the value is expected to be dynamic use a placeholder like this {0},{1},{2}. 
 |Param 2|{1}|
 |Param 3|{2}|
 
-We will pass List of String and each index in List will replace the placeholder dynamically. Refer image above.
+We will pass List of String and each index in List will replace the placeholder dynamically. Refer image below.
 
 ** If we are considering to use the framework where we are getting the Id of the record in the url and fetching it using requestUri method, then we could set the record values 
 
