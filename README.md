@@ -14,7 +14,7 @@
 |Component Name|Parent Object|Component Type|
 |--------------|-------------|--------------|
 |HttpApiFactory_Test||Apex Class|
-|CustomException||Apex Class|
+|HttpApiCustomException||Apex Class|
 |HttpApiFactory||Apex Class|
 |MockHttpResponseGeneratorForHTTPFactory||Apex Class|
 
@@ -36,7 +36,7 @@
 |Type Value|	Integration Values Setup|Custom Field|
 |Type|	Integration Values Setup|Custom Field|
 |Is Response a collection type|Integration Setup|Custom Field|
-
+ 
  
 #### Tabs (1)
 |Component Name|Parent Object|Component Type|
