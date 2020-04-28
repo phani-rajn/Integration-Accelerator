@@ -3,29 +3,84 @@
 // This class handles HTTP Request for any integration
 public class HttpApiFactory{
     
-    // Static Method
-    public static Object requestResourceStatic(String integrationRequestSetupName, String bodyForPostRequest){
+    // Static Method with static request
+    public static object requestResourceStatic(String integrationRequestSetupName){
         if(String.isBlank(integrationRequestSetupName)){
             throw new HttpApiCustomException('Please specify Integration request setup name');
         }
         HttpApiFactory requestFactory = new HttpApiFactory();
-        Object factoryResponse = requestFactory.requestResource(integrationRequestSetupName, bodyForPostRequest);
+        Object factoryResponse = requestFactory.requestResource(integrationRequestSetupName, '', new List<String>());
         return factoryResponse;
     }
-    
-    // Non-static method
-    public Object requestResource(String integrationRequestSetupName, String bodyForPostRequest){
+        
+    // Static Method with body for post request
+    public static Object requestResourceStatic(String integrationRequestSetupName, String bodyForPostRequest){
         if(String.isBlank(integrationRequestSetupName)){
             throw new HttpApiCustomException('Please specify Integration request setup name');
         }
-        Integration_Setup__c[] setupRecord = [Select Id, Name, Callout_Endpoint_Url__c, Request_Type__c, Response_Parse_Class_Name__c, Is_Response_a_collection_type__c,
+        if(bodyForPostRequest == null){
+            throw new HttpApiCustomException('Request cannot have null parameters');
+        }
+        HttpApiFactory requestFactory = new HttpApiFactory();
+        Object factoryResponse = requestFactory.requestResource(integrationRequestSetupName, bodyForPostRequest, new List<String>());
+        return factoryResponse;
+    }
+    
+    // Static Method with dynamic parameters for enpoint
+    public static Object requestResourceStatic(String integrationRequestSetupName, List<String> parameters){
+        if(String.isBlank(integrationRequestSetupName)){
+            throw new HttpApiCustomException('Please specify Integration request setup name');
+        }
+        if(parameters == null){
+            throw new HttpApiCustomException('Request cannot have null parameters');
+        }
+        HttpApiFactory requestFactory = new HttpApiFactory();
+        Object factoryResponse = requestFactory.requestResource(integrationRequestSetupName, '', parameters);
+        return factoryResponse;
+    }
+    
+    // Static Method
+    static Object requestResourceStatic(String integrationRequestSetupName, String bodyForPostRequest, List<String> dynamicUrlParameters){
+        if(String.isBlank(integrationRequestSetupName)){
+            throw new HttpApiCustomException('Please specify Integration request setup name');
+        }
+        HttpApiFactory requestFactory = new HttpApiFactory();
+        Object factoryResponse = requestFactory.requestResource(integrationRequestSetupName, bodyForPostRequest, dynamicUrlParameters);
+        return factoryResponse;
+    }
+    
+    // ================================================================================================ //
+    // Non-static method with body for post request
+    public Object requestResource(String integrationRequestSetupName){
+        return requestResource(integrationRequestSetupName,'', new List<String>());
+    }
+    
+    // Non-static method with body for post request
+    public Object requestResource(String integrationRequestSetupName, String bodyForPostRequest){
+        if(bodyForPostRequest == null){
+            throw new HttpApiCustomException('Request cannot have null parameters');
+        }
+        return requestResource(integrationRequestSetupName,bodyForPostRequest, new List<String>());
+    }
+    
+    // Non-static method with dynamic parameters for body
+    public Object requestResource(String integrationRequestSetupName, List<string> parameters){
+        if(parameters == null){
+            throw new HttpApiCustomException('Request cannot have null parameters');
+        }
+        return requestResource(integrationRequestSetupName, '', parameters);
+    }
+    
+    // Non-static method
+    Object requestResource(String integrationRequestSetupName, String bodyForPostRequest, List<String> dynamicUrlParameters){
+        if(String.isBlank(integrationRequestSetupName)){
+            throw new HttpApiCustomException('Please specify Integration request setup name');
+        }
+        Integration_Setup__c[] setupRecord = [Select Id, Name, Callout_Endpoint_Url__c, Request_Type__c, Response_Parse_Class_Name__c, Is_Response_a_collection_type__c, Has_Values_In_Setup__c,
                 (Select Id,Type__c, Type_Key__c	,Type_Value__c from Integration_Values_Setup__r) from Integration_Setup__c where Name = :integrationRequestSetupName limit 1];
         if(setupRecord.isEmpty()){
             throw new HttpApiCustomException('Integration Setup record not found, please check label in Integration Setup Custom Metadata');
         }
-        /*if(String.isBlank(setupRecord[0].Response_Type_Class_Name__c)){
-            throw new CustomException('Response Type Class Name not found, please check in Integration Setup Custom Metadata');
-        }*/
         
         // set new Request 
         HttpRequest factoryRequest = new HttpRequest();
@@ -36,6 +91,7 @@ public class HttpApiFactory{
         }
         // set header values
         boolean removeLastCharacter = false;
+        boolean urlFormattingReqd = false;
         for(Integration_Values_Setup__c valueRecord : setupRecord[0].Integration_Values_Setup__r){
             if(valueRecord.Type__c == 'Header' && String.isNotBlank(valueRecord.Type_Key__c) && String.isNotBlank(valueRecord.Type_Value__c)){
                 factoryRequest.setHeader(valueRecord.Type_Key__c, valueRecord.Type_Value__c);
@@ -44,12 +100,23 @@ public class HttpApiFactory{
                 removeLastCharacter = true;
                 endpoint += valueRecord.Type_Key__c+'='+valueRecord.Type_Value__c+'&';
             }
+            if(valueRecord.Type__c == 'RequestURI_with_lastIndex' && String.isNotBlank(valueRecord.Type_Key__c) && String.isNotBlank(valueRecord.Type_Value__c)){
+                endpoint += '/'+valueRecord.Type_Value__c;
+            }
         }
+        
         if(removeLastCharacter){
             endpoint = endpoint.removeEnd('&');
         }else{
-            endpoint = endpoint.removeEnd('?');
+            endpoint = endpoint.remove('?');
         }
+        
+        if(!dynamicUrlParameters.isEmpty()){
+            endpoint = String.format(endpoint, dynamicUrlParameters);
+        }
+        
+        System.debug('endpoint '+endpoint);
+           
         // set end point url for the request
         factoryRequest.setEndpoint(endpoint);
         
@@ -99,5 +166,4 @@ public class HttpApiFactory{
             throw new HttpApiCustomException('Bad Request: Request returned with response - '+factoryResponse.getBody());
         }
     }
-
 }
