@@ -68,7 +68,11 @@ Screenshots for example:
 ![](Images/IntegrationSetup.png)
 
 
-### Code Snippets
-##### The code supports both static and non static methods.
-*Below is the snippet for various use-cases*
-
+#### Code Snippets
+**The code supports both static and non static methods.**
+**Below is the snippet for various use-cases**
+*GET Request With static parameters defined or no parameters defined*
+If we have a setup where we have GET request setup and if the parameters are statically defined in setup values object
+```
+HttpApiFactory.requestResourceStatic(<Integration Setup Name>)
+```
