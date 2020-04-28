@@ -6,23 +6,6 @@
 
 ## User Manual
 ### Package Components	 
-#### Resources (3)
-|Component Name|Parent Object|Component Type|
-|--------------|-------------|--------------|
-|All	|Integration Setup|	List View|
-|Integration Values Setup Layout|Integration Values Setup|Page Layout|
-|Integration Setup Layout|Integration Setup|Page Layout|
-
- 
-#### Code (4)
-|Component Name|Parent Object|Component Type|
-|--------------|-------------|--------------|
-|HttpApiFactory_Test||Apex Class|
-|HttpApiCustomException||Apex Class|
-|HttpApiFactory||Apex Class|
-|MockHttpResponseGeneratorForHTTPFactory||Apex Class|
-
- 
 #### Objects (2)
 |Component Name|Parent Object|Component Type|
 |--------------|-------------|--------------|
@@ -41,8 +24,21 @@
 |Type Value|	Integration Values Setup|Custom Field|
 |Type|	Integration Values Setup|Custom Field|
 
- 
- 
+#### Code (4)
+|Component Name|Parent Object|Component Type|
+|--------------|-------------|--------------|
+|HttpApiFactory_Test||Apex Class|
+|HttpApiCustomException||Apex Class|
+|HttpApiFactory||Apex Class|
+|MockHttpResponseGeneratorForHTTPFactory||Apex Class|
+
+#### Resources (3)
+|Component Name|Parent Object|Component Type|
+|--------------|-------------|--------------|
+|All	|Integration Setup|	List View|
+|Integration Values Setup Layout|Integration Values Setup|Page Layout|
+|Integration Setup Layout|Integration Setup|Page Layout|
+
 #### Tabs (1)
 |Component Name|Parent Object|Component Type|
 |--------------|-------------|--------------|
@@ -66,18 +62,24 @@ If the value is expected to be dynamic use a placeholder like this {0},{1},{2}. 
 
 |Type Key|Type Value|
 |--------|----------|
-|Param 1|{0}|
-|Param 2|{1}|
-|Param 3|{2}|
+|city|{0}|
+|state|{1}|
+|country|{2}|
 
-We will pass List of String and each index in List will replace the placeholder dynamically. Refer image below.
+We will pass List of String and each index in List will replace the placeholder dynamically. Refer code snippet below.
+```
+// Request where we need to hit endpoint with dynamic parameters
+HttpApiFactory.requestResourceStatic(<Integration Setup Name>,
+			new List<String>{‘bangalore’,‘karnataka’,‘india’}) 
+```
+This will generate the endpoint url as: 
+https://domain_end_point.com?city=bangalore&state=karnataka&country=india
 
 ** If we are considering to use the framework where we are getting the Id of the record in the url and fetching it using requestUri method, then we could set the record values 
 
 |Type|Type Key|Type Value|
 |----|--------|----------|
 |RequestURI_with_lastIndex|AccountId|{0}|
-
 
 
 **Things to consider:**
@@ -107,6 +109,7 @@ HttpApiFactory.requestResourceStatic(<Integration Setup Name>,<JSON String for P
 // Specifically for GET Method where we need to have dynamic parameter values. Each Index of List will be considered as parameter value.
 HttpApiFactory.requestResourceStatic(<Integration Setup Name>,<List of String parameter values>);
 ```
+
 *Non-Static Methods*
 ```
 // Specifically for GET Request where we need to hit endpoint with static parameters or no parameters
@@ -125,6 +128,7 @@ apiFactory.requestResourceStatic(<Integration Setup Name>,<JSON String for POST 
 HttpApiFactory apiFactory = new HttpApiFactory();
 apiFactory.requestResourceStatic(<Integration Setup Name>,<List of String parameter values>);
 ```
+
 #### When we declare the **Response Parse Class Name** in the setup record, below is a example of how this could be used.
 If *Is Response a collection type* is checked, it is believed that the response is expected to be of type List
 ```
