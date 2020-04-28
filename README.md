@@ -1,58 +1,70 @@
-# Salesforce App
+# Integration Accelerator Asset
+## User Manual
 
-This guide helps Salesforce developers who are new to Visual Studio Code go from zero to a deployed app using Salesforce Extensions for VS Code and Salesforce CLI.
+### Package Components	 
+#### Resources (3)
+Component Name	Parent Object	Component Type
+All	Integration Setup	List View
+Integration Values Setup Layout	Integration Values Setup	Page Layout
+Integration Setup Layout	Integration Setup	Page Layout
 
-## Part 1: Choosing a Development Model
+ 
+Code (4)
+Component Name	Parent Object	Component Type
+HttpApiFactory_Test		Apex Class
+CustomException		Apex Class
+HttpApiFactory		Apex Class
+MockHttpResponseGeneratorForHTTPFactory		Apex Class
 
-There are two types of developer processes or models supported in Salesforce Extensions for VS Code and Salesforce CLI. These models are explained below. Each model offers pros and cons and is fully supported.
+ 
+Objects (2)
+Component Name	Parent Object	Component Type
+Integration Setup		Custom Object
+Integration Values Setup		Custom Object
 
-### Package Development Model
+ 
+Fields (8)
+Component Name	Parent Object	Component Type
+Related Integration Setup	Integration Values Setup	Custom Field
+Type Key	Integration Values Setup	Custom Field
+Response Parse Class Name	Integration Setup	Custom Field
+Callout Endpoint Url	Integration Setup	Custom Field
+Request Type	Integration Setup	Custom Field
+Type Value	Integration Values Setup	Custom Field
+Type	Integration Values Setup	Custom Field
+Is Response a collection type	Integration Setup	Custom Field
 
-The package development model allows you to create self-contained applications or libraries that are deployed to your org as a single package. These packages are typically developed against source-tracked orgs called scratch orgs. This development model is geared toward a more modern type of software development process that uses org source tracking, source control, and continuous integration and deployment.
+ 
+Tabs (1)
+Component Name	Parent Object	Component Type
+Integration Setup		Tab
 
-If you are starting a new project, we recommend that you consider the package development model. To start developing with this model in Visual Studio Code, see [Package Development Model with VS Code](https://forcedotcom.github.io/salesforcedx-vscode/articles/user-guide/package-development-model). For details about the model, see the [Package Development Model](https://trailhead.salesforce.com/en/content/learn/modules/sfdx_dev_model) Trailhead module.
 
-If you are developing against scratch orgs, use the command `SFDX: Create Project` (VS Code) or `sfdx force:project:create` (Salesforce CLI)  to create your project. If you used another command, you might want to start over with that command.
+Here is the package url : https://login.salesforce.com/packaging/installPackage.apexp?p0=04t2v000005tEla 
+As this is unmanaged package, every component in the package is editable. 
+1.	Check for desired profile to enable Integration Setup Tab in your org.
+2.	Create a record in Integration Setup object with following details
+a.	Name for Integration – This would be used as identifier in our integration framework. So, this could be kept as unique name.
+b.	End Point Url
+c.	Request Type – GET, POST, PUT, PATCH (Note: It is expected there will remote site settings for domain url if the request is of type GET)
+d.	Response Parse Class Name – Ideally for any response we would be getting in any integration, we create a wrapper class. We could also use sObject name here if desired response is of type sObject details.
+e.	Is Response a collection type – if the response is of type collection, pls check this checkbox.
+3.	If the Integration Setup created above needs to set header details or url parameters, create record in Related List – Integration Values Setup
+4.	Create a record in Integration values setup with following details
+a.	Related Integration Setup – Master detail field with Integration setup object
+b.	Type – Header or Url Param
+c.	Type Key – Key element for Type
+d.	Type Value – Value element for Type
+5.	Test the Integration with following code snippet
+HttpApiFactory.requestResourceStatic(<name of integration setup record created above>, 
+<body if the request is of type POST else this can be null>);
 
-When working with source-tracked orgs, use the commands `SFDX: Push Source to Org` (VS Code) or `sfdx force:source:push` (Salesforce CLI) and `SFDX: Pull Source from Org` (VS Code) or `sfdx force:source:pull` (Salesforce CLI). Do not use the `Retrieve` and `Deploy` commands with scratch orgs.
+6.	This will give a debug of the response if request is successful.
 
-### Org Development Model
+Things to consider:
+1.	It is suggested to create a Named Credential if the Authentication is of type Username-password or oAuth authentication.
+2.	It is suggested to use Auth Providers and use that in named credentials to set up authentication.
+3.	Endpoint generated created in Named Credentials can be used in Integration Setup object. 
 
-The org development model allows you to connect directly to a non-source-tracked org (sandbox, Developer Edition (DE) org, Trailhead Playground, or even a production org) to retrieve and deploy code directly. This model is similar to the type of development you have done in the past using tools such as Force.com IDE or MavensMate.
-
-To start developing with this model in Visual Studio Code, see [Org Development Model with VS Code](https://forcedotcom.github.io/salesforcedx-vscode/articles/user-guide/org-development-model). For details about the model, see the [Org Development Model](https://trailhead.salesforce.com/content/learn/modules/org-development-model) Trailhead module.
-
-If you are developing against non-source-tracked orgs, use the command `SFDX: Create Project with Manifest` (VS Code) or `sfdx force:project:create --manifest` (Salesforce CLI) to create your project. If you used another command, you might want to start over with this command to create a Salesforce DX project.
-
-When working with non-source-tracked orgs, use the commands `SFDX: Deploy Source to Org` (VS Code) or `sfdx force:source:deploy` (Salesforce CLI) and `SFDX: Retrieve Source from Org` (VS Code) or `sfdx force:source:retrieve` (Salesforce CLI). The `Push` and `Pull` commands work only on orgs with source tracking (scratch orgs).
-
-## The `sfdx-project.json` File
-
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
-
-The most important parts of this file for getting started are the `sfdcLoginUrl` and `packageDirectories` properties.
-
-The `sfdcLoginUrl` specifies the default login URL to use when authorizing an org.
-
-The `packageDirectories` filepath tells VS Code and Salesforce CLI where the metadata files for your project are stored. You need at least one package directory set in your file. The default setting is shown below. If you set the value of the `packageDirectories` property called `path` to `force-app`, by default your metadata goes in the `force-app` directory. If you want to change that directory to something like `src`, simply change the `path` value and make sure the directory you’re pointing to exists.
-
-```json
-"packageDirectories" : [
-    {
-      "path": "force-app",
-      "default": true
-    }
-]
-```
-
-## Part 2: Working with Source
-
-For details about developing against scratch orgs, see the [Package Development Model](https://trailhead.salesforce.com/en/content/learn/modules/sfdx_dev_model) module on Trailhead or [Package Development Model with VS Code](https://forcedotcom.github.io/salesforcedx-vscode/articles/user-guide/package-development-model).
-
-For details about developing against orgs that don’t have source tracking, see the [Org Development Model](https://trailhead.salesforce.com/content/learn/modules/org-development-model) module on Trailhead or [Org Development Model with VS Code](https://forcedotcom.github.io/salesforcedx-vscode/articles/user-guide/org-development-model).
-
-## Part 3: Deploying to Production
-
-Don’t deploy your code to production directly from Visual Studio Code. The deploy and retrieve commands do not support transactional operations, which means that a deployment can fail in a partial state. Also, the deploy and retrieve commands don’t run the tests needed for production deployments. The push and pull commands are disabled for orgs that don’t have source tracking, including production orgs.
-
-Deploy your changes to production using [packaging](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_dev2gp.htm) or by [converting your source](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_force_source.htm#cli_reference_convert) into metadata format and using the [metadata deploy command](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_force_mdapi.htm#cli_reference_deploy).
+Screenshots for example:
+ 
