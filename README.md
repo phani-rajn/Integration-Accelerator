@@ -76,7 +76,7 @@ We will pass List of String and each index in List will replace the placeholder 
 
 
 
-Things to consider:
+**Things to consider:**
 * It is suggested to create a Named Credential if the Authentication is of type Username-password or oAuth authentication.
 * It is suggested to use Auth Providers and use that in named credentials to set up authentication.
 * Endpoint generated created in Named Credentials can be used in Integration Setup object. 
