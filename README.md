@@ -66,8 +66,7 @@ Things to consider:
 
 Screenshots for example:
 ![](Images/IntegrationSetup.png)
-----------------------------------------------------------------------------------------------------------
-![](Images/DynamicParamValuesForIntegration.png)
+
 
 #### Code Snippets
 **The code supports both static and non static methods. Below is the snippet for various use-cases.**<br/>
@@ -78,11 +77,6 @@ HttpApiFactory.requestResourceStatic(<Integration Setup Name>)
 ```
 <br/>
 *GET Request With dynamic parameters defined*<br/>
-If we have a setup where we have GET request setup and if the parameter values are to be passed dynamically.
-* We need to setup Integration Values for the dynamic parameter values. 
-* For this, we need to setup place holders for every Integration Values Setup record in the Integration values setup object. 
 ![](Images/DynamicParamValuesForIntegration.png)
-```
-HttpApiFactory.requestResourceStatic(<Integration Setup Name>)
-```
 <br/>
+
