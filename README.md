@@ -28,14 +28,15 @@
 #### Fields (8)
 |Component Name|Parent Object|Component Type|
 |--------------|-------------|--------------|
-|Related Integration Setup|Integration Values Setup|Custom Field|
-|Type Key|Integration Values Setup|Custom Field|
 |Response Parse Class Name|Integration Setup|Custom Field|
 |Callout Endpoint Url|Integration Setup|Custom Field|
 |Request Type|Integration Setup|Custom Field|
+|Is Response a collection type|Integration Setup|Custom Field|
+|Related Integration Setup|Integration Values Setup|Custom Field|
+|Type Key|Integration Values Setup|Custom Field|
 |Type Value|	Integration Values Setup|Custom Field|
 |Type|	Integration Values Setup|Custom Field|
-|Is Response a collection type|Integration Setup|Custom Field|
+
  
  
 #### Tabs (1)
@@ -119,4 +120,14 @@ apiFactory.requestResourceStatic(<Integration Setup Name>,<JSON String for POST 
 // Specifically for GET Method where we need to have dynamic parameter values. Each Index of List will be considered as parameter value.
 HttpApiFactory apiFactory = new HttpApiFactory();
 apiFactory.requestResourceStatic(<Integration Setup Name>,<List of String parameter values>);
+```
+#### When we declare the **Response Parse Class Name** in the setup record, below is a example of how this could be used.
+If *Is Response a collection type* is checked, it is believed that the response is expected to be of type List
+```
+// Suppose ContactWrapper is the Class Name defined in the setup record and response is expected as List
+List<ContactWrapper> wrapperList = (List<ContactWrapper>)HttpApiFactory.requestResourceStatic(<Integration Setup Name>, <JSON String for POST Method>);
+```
+If *Is Response a collection type* is unchecked, it is believed that the response is expected to be of Single record
+```
+ContactWrapper wrapperJSON = (ContactWrapper)HttpApiFactory.requestResourceStatic(<Integration Setup Name>, <JSON String for POST Method>);
 ```
