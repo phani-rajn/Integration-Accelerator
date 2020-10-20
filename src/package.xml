@@ -21,5 +21,13 @@
         <members>Integration_Values_Setup__c-Integration Values Setup Layout</members>
         <name>Layout</name>
     </types>
+    <types>
+        <members>Integration_Setup_Permission_Set</members>
+        <name>PermissionSet</name>
+    </types>
+	<types>
+		<members>Integration_Setup</members>
+		<name>CustomApplication</name>
+	</types>
     <version>36.0</version>
 </Package>
