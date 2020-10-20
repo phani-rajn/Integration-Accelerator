@@ -29,5 +29,5 @@
 	<members>Integration_Setup</members>
 	<name>CustomApplication</name>
     </types>
-    <version>36.0</version>
+    <version>44.0</version>
 </Package>
