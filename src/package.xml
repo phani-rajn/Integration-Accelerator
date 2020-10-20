@@ -13,7 +13,7 @@
         <name>CustomObject</name>
     </types>
     <types>
-        <members>*</members>
+        <members>Integration_Setup__c</members>
         <name>CustomTab</name>
     </types>
     <types>
